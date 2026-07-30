@@ -57,7 +57,7 @@ const Hero = ({ isDark }) => {
       <motion.div
         className="absolute top-[10%] left-[5%] w-[400px] h-[400px] rounded-full pointer-events-none"
         style={{
-          background: 'radial-gradient(circle, rgba(0, 217, 255, 0.15) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(129, 181, 188, 0.42) 0%, transparent 70%)',
         }}
         animate={{ y: [0, -40, 0], x: [0, 20, 0] }}
         transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
@@ -65,7 +65,7 @@ const Hero = ({ isDark }) => {
       <motion.div
         className="absolute bottom-[5%] right-[5%] w-[350px] h-[350px] rounded-full pointer-events-none"
         style={{
-          background: 'radial-gradient(circle, rgba(224, 195, 252, 0.2) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(151, 112, 187, 0.38) 0%, transparent 70%)',
         }}
         animate={{ y: [0, 40, 0], x: [0, -20, 0] }}
         transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
@@ -179,7 +179,7 @@ const Hero = ({ isDark }) => {
           <motion.div
             className="absolute w-[250px] h-[250px] sm:w-[300px] sm:h-[300px] md:w-[380px] md:h-[380px] rounded-full opacity-60"
             style={{
-              background: 'linear-gradient(135deg, #00D9FF, #8EC5FC)',
+              background: 'linear-gradient(135deg, #a2d8e1, #e1aef269)',
             }}
             animate={{ rotate: 360 }}
             transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}

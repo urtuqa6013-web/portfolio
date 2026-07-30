@@ -139,9 +139,6 @@ const Navbar = ({ isDark }) => {
             tracking-tight
             bg-gradient-to-r
             from-[#00D9FF]
-            via-[#06D7D9]
-            via-[#8EC5FC]
-            to-[#E0C3FC]
             bg-clip-text
             text-transparent"
           >
