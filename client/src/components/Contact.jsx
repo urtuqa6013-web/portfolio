@@ -137,7 +137,7 @@ const Contact = ({ isDark }) => {
                   key={index}
                   href={info.href}
                   variants={itemVariants}
-                  className={`p-6 rounded-lg backdrop-blur-md border transition-all ${
+                  className={`p-6 rounded-lg  border transition-all ${
                     isDark
                       ? 'bg-gray-800/50 border-gray-700/50 hover:bg-gray-800/80'
                       : 'bg-white/50 border-gray-200/50 hover:bg-white/80'

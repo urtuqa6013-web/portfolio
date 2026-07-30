@@ -39,9 +39,9 @@ const Hero = ({ isDark }) => {
   };
 
   const stats = [
-    { number: '50+', label: 'Projects' },
-    { number: '30+', label: 'Happy Clients' },
-    { number: '6+', label: 'Months Exp.' },
+    { number: '10+', label: 'Projects' },
+    { number: '10+', label: 'Happy Clients' },
+    { number: '12+', label: 'Months Exp.' },
     { number: '100%', label: 'Dedicated' },
   ];
 

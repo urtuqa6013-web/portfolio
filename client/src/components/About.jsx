@@ -5,21 +5,21 @@ import { HiCheckCircle } from 'react-icons/hi';
 const About = ({ isDark }) => {
   const experiences = [
     {
-      year: '2023 - Present',
+      year: '2026 - Present',
       title: 'Full-Stack Developer',
       company: 'Tech Company',
       description: 'Building scalable web applications using MERN stack',
       skills: ['React', 'Node.js', 'MongoDB', 'Express'],
     },
     {
-      year: '2022 - 2023',
+      year: '2024 - 2025',
       title: 'Frontend Developer',
       company: 'Digital Agency',
       description: 'Creating responsive and interactive user interfaces',
       skills: ['React', 'Tailwind CSS', 'JavaScript'],
     },
     {
-      year: '2021 - 2022',
+      year: '2024 - 2025',
       title: 'Junior Developer',
       company: 'Startup',
       description: 'Learning and developing core web development skills',
@@ -28,10 +28,10 @@ const About = ({ isDark }) => {
   ];
 
   const stats = [
-    { label: 'Projects Completed', value: '50+', icon: '📁' },
-    { label: 'Happy Clients', value: '30+', icon: '😊' },
+    { label: 'Projects Completed', value: '10+', icon: '📁' },
+    { label: 'Happy Clients', value: '10+', icon: '😊' },
     { label: 'Years Experience', value: '3+', icon: '⏱️' },
-    { label: 'Code Commits', value: '1000+', icon: '📝' },
+    { label: 'Code Commits', value: '100+', icon: '📝' },
   ];
 
   const containerVariants = {
