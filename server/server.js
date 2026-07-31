@@ -39,8 +39,11 @@ app.use('/api/contact', contactRoutes);
 app.get('/api/stats', statsRoutes.getStats); // Simple stat route
 
 // Health Check
-app.get('/api/health', (req, res) => {
-  res.json({ status: 'Server is running' });
+app.get("/", (req, res) => {
+  res.json({
+    message: "Portfolio Backend API",
+    status: "Running"
+  });
 });
 
 // ============ ERROR HANDLING ============
