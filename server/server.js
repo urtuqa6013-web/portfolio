@@ -22,7 +22,7 @@ const app = express();
 // ============ MIDDLEWARE ============
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://portfolio-urwa.vercel.app",
+  "https://portfolio-jet-rho-12.vercel.app"
 ];
 
 app.use(
