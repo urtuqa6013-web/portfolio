@@ -20,13 +20,23 @@ const connectDB = require('./config/db');
 const app = express();
 
 // ============ MIDDLEWARE ============
-app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:5173',
-  credentials: true,
-}));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(morgan('dev'));
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://portfolio-urwa.vercel.app",
+];
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+  })
+);
 
 // ============ DATABASE ============
 connectDB();

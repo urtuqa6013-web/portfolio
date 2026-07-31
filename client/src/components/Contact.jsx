@@ -35,6 +35,8 @@ const Contact = ({ isDark }) => {
     }
 
     try {
+      console.log(import.meta.env.VITE_API_URL);
+console.log(`${import.meta.env.VITE_API_URL}/api/contact`);
       // Send data to your backend API
       const response = await axios.post(
         `${import.meta.env.VITE_API_URL}/api/contact`, 
