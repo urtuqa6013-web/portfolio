@@ -1,31 +1,40 @@
-const express = require('express');
-const cors = require('cors');
-const dotenv = require('dotenv');
-const morgan = require('morgan');
-
-// Load environment variables
+const express = require("express");
+const cors = require("cors");
+const dotenv = require("dotenv");
+const morgan = require("morgan");
 const path = require("path");
 
+// Load environment variables
 dotenv.config({
   path: path.join(__dirname, ".env"),
 });
-console.log("🚀 Backend Version: Aug 1 CORS Fix");
 
+// Database
+const connectDB = require("./config/db");
 
-// Route Imports
-const projectRoutes = require('./routes/projectRoutes');
-const skillRoutes = require('./routes/skillRoutes');
-const experienceRoutes = require('./routes/experienceRoutes');
-const contactRoutes = require('./routes/contactRoutes');
-const statsRoutes = require('./controllers/statsController'); // Direct import for stats
+// Routes
+const projectRoutes = require("./routes/projectRoutes");
+const skillRoutes = require("./routes/skillRoutes");
+const experienceRoutes = require("./routes/experienceRoutes");
+const contactRoutes = require("./routes/contactRoutes");
+const statsRoutes = require("./controllers/statsController");
 
-// Config Imports
-const connectDB = require('./config/db');
-
-// Initialize App
 const app = express();
 
-// ============ MIDDLEWARE ============
+// Connect database for every serverless invocation
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({
+      message: "Database connection failed",
+    });
+  }
+});
+
+// CORS
 const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:5174",
@@ -34,8 +43,7 @@ const allowedOrigins = [
 
 app.use(
   cors({
-    origin: function (origin, callback) {
-      // Allow requests with no origin (Postman, server-to-server, health checks)
+    origin(origin, callback) {
       if (!origin) return callback(null, true);
 
       if (allowedOrigins.includes(origin)) {
@@ -43,48 +51,44 @@ app.use(
       }
 
       console.log("Blocked Origin:", origin);
-
-      // Don't crash the function
       return callback(null, false);
     },
     credentials: true,
   })
 );
 
-
-
+// Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 
-// ============ DATABASE ============
-connectDB();
+// Routes
+app.use("/api/projects", projectRoutes);
+app.use("/api/skills", skillRoutes);
+app.use("/api/experience", experienceRoutes);
+app.use("/api/contact", contactRoutes);
+app.get("/api/stats", statsRoutes.getStats);
 
-// ============ ROUTES ============
-app.use('/api/projects', projectRoutes);
-app.use('/api/skills', skillRoutes);
-app.use('/api/experience', experienceRoutes);
-app.use('/api/contact', contactRoutes);
-app.get('/api/stats', statsRoutes.getStats); // Simple stat route
-
-// Health Check
+// Home
 app.get("/", (req, res) => {
   res.json({
     message: "Portfolio Backend API",
-    status: "Running"
+    status: "Running",
   });
 });
 
-// ============ ERROR HANDLING ============
-app.use((error, req, res, next) => {
-  console.error(error.stack);
-  res.status(500).json({ message: 'Server error', error: error.message });
+// Error handler
+app.use((err, req, res, next) => {
+  console.error(err);
+  res.status(500).json({
+    message: err.message,
+  });
 });
 
-// ============ START SERVER ============
-const PORT = process.env.PORT || 5001;
-
+// Local development only
 if (process.env.NODE_ENV !== "production") {
+  const PORT = process.env.PORT || 5001;
+
   app.listen(PORT, () => {
     console.log(`🚀 Server running on http://localhost:${PORT}`);
   });
