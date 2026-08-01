@@ -32,19 +32,26 @@ const allowedOrigins = [
   "https://portfolio-jet-rho-12.vercel.app",
 ];
 
-const corsOptions = {
-  origin(origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error(`Origin ${origin} not allowed by CORS`));
-    }
-  },
-  credentials: true,
-};
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      // Allow requests with no origin (Postman, server-to-server, health checks)
+      if (!origin) return callback(null, true);
 
-app.use(cors(corsOptions));
-app.options("*", cors(corsOptions));
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      console.log("Blocked Origin:", origin);
+
+      // Don't crash the function
+      return callback(null, false);
+    },
+    credentials: true,
+  })
+);
+
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
