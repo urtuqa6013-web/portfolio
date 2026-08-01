@@ -41,7 +41,7 @@ app.use(async (req, res, next) => {
 // CORS
 const cors = require("cors");
 app.use(cors({
-  origin: ["http://localhost:5173", "https://aapka-frontend-vercel-url.vercel.app"]
+  origin: ["http://localhost:5173", "https://portfolio-tau-indol-v9t6citybp.vercel.app"]
 }));
 
 // Middleware
