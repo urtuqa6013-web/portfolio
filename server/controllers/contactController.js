@@ -10,11 +10,10 @@ exports.getMessages = async (req, res) => {
 
 exports.createMessage = async (req, res) => {
   try {
-    const newContact = await Contact.create(req.body); // Saves to MongoDB
 
+       const newContact = await Contact.create(req.body);
 
-
-  
+   
     // --- EMAIL CODE ---
     const transporter = nodemailer.createTransport({
       service: 'gmail',
@@ -22,10 +21,10 @@ exports.createMessage = async (req, res) => {
     });
 
     const mailOptions = {
-  from: process.env.MAIL_USER,
-  to: process.env.EMAIL_TO,
-  subject: `New Portfolio Message: ${req.body.subject || "No Subject"}`,
-  html: `
+      from: process.env.MAIL_USER,
+      to: process.env.EMAIL_TO,
+      subject: `New Portfolio Message: ${req.body.subject || "No Subject"}`,
+      html: `
     <h3>New Message from your Portfolio!</h3>
     <p><strong>Name:</strong> ${req.body.name}</p>
     <p><strong>Email:</strong> ${req.body.email}</p>
@@ -33,15 +32,16 @@ exports.createMessage = async (req, res) => {
     <p><strong>Message:</strong></p>
     <p>${req.body.message}</p>
   `,
-};
+    };
 
 
 
-await transporter.sendMail(mailOptions);
+    await transporter.sendMail(mailOptions);
     // ------------------
 
     res.status(201).json(newContact);
-  } catch (error) { res.status(400).json({ message: error.message }); }
+  } catch (error) {
+     res.status(400).json({ message: error.message }); }
 };
 
 exports.updateMessage = async (req, res) => {

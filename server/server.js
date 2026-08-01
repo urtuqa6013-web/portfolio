@@ -4,7 +4,13 @@ const dotenv = require('dotenv');
 const morgan = require('morgan');
 
 // Load environment variables
-dotenv.config();
+const path = require("path");
+
+dotenv.config({
+  path: path.join(__dirname, ".env"),
+});
+
+
 
 // Route Imports
 const projectRoutes = require('./routes/projectRoutes');
@@ -22,21 +28,27 @@ const app = express();
 // ============ MIDDLEWARE ============
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://portfolio-jet-rho-12.vercel.app"
+  "http://localhost:5174",
+  "https://portfolio-jet-rho-12.vercel.app",
 ];
 
-app.use(
-  cors({
-    origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-    credentials: true,
-  })
-);
+const corsOptions = {
+  origin(origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error(`Origin ${origin} not allowed by CORS`));
+    }
+  },
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(morgan("dev"));
 
 // ============ DATABASE ============
 connectDB();
