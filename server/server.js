@@ -39,27 +39,10 @@ app.use(async (req, res, next) => {
 });
 
 // CORS
-const allowedOrigins = [
-  "http://localhost:5173",
-  "http://localhost:5174",
-  "https://portfolio-jet-rho-12.vercel.app",
-];
-
-app.use(
-  cors({
-    origin(origin, callback) {
-      if (!origin) return callback(null, true);
-
-      if (allowedOrigins.includes(origin)) {
-        return callback(null, true);
-      }
-
-      console.log("Blocked Origin:", origin);
-      return callback(null, false);
-    },
-    credentials: true,
-  })
-);
+const cors = require("cors");
+app.use(cors({
+  origin: ["http://localhost:5173", "https://aapka-frontend-vercel-url.vercel.app"]
+}));
 
 // Middleware
 app.use(express.json());
