@@ -9,7 +9,7 @@ const path = require("path");
 dotenv.config({
   path: path.join(__dirname, ".env"),
 });
-
+console.log("🚀 Backend Version: Aug 1 CORS Fix");
 
 
 // Route Imports
