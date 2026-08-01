@@ -41,7 +41,7 @@ app.use(async (req, res, next) => {
 // CORS
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://portfolio-tau-indol-v9t6citybp.vercel.app",
+  "https://portfolio-fb5z.vercel.app",
 ];
 
 app.use(
