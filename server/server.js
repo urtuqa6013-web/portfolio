@@ -10,6 +10,8 @@ dotenv.config({
 });
 
 // Database
+dotenv.config();
+
 const connectDB = require("./config/db");
 
 // Routes
@@ -20,6 +22,8 @@ const contactRoutes = require("./routes/contactRoutes");
 const statsRoutes = require("./controllers/statsController");
 
 const app = express();
+
+connectDB();
 
 // Connect database for every serverless invocation
 app.use(async (req, res, next) => {
