@@ -39,10 +39,26 @@ app.use(async (req, res, next) => {
 });
 
 // CORS
-const cors = require("cors");
-app.use(cors({
-  origin: ["http://localhost:5173", "https://portfolio-tau-indol-v9t6citybp.vercel.app"]
-}));
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://portfolio-tau-indol-v9t6citybp.vercel.app",
+];
+
+app.use(
+  cors({
+    origin(origin, callback) {
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      console.log("Blocked Origin:", origin);
+      return callback(null, false);
+    },
+    credentials: true,
+  })
+);
 
 // Middleware
 app.use(express.json());
