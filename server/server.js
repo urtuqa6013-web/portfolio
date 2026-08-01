@@ -41,7 +41,9 @@ app.use(async (req, res, next) => {
 // CORS
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://portfolio-fb5z.vercel.app",
+  "https://portfolio-tau-indol-v9t6citybp.vercel.app",
+  "https://portfolio-38dp49ouz-urwa.vercel.app", // Yeh URL console error se liya hai
+  "https://portfolio-fb5z.vercel.app" // Aapka main frontend domain (jo Vercel par Assigned hai)
 ];
 
 app.use(
