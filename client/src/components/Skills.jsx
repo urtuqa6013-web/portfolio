@@ -198,7 +198,7 @@ export default function Skills({ isDark }) {
                   scale: 1.05,
                 }}
                 className={`group rounded-xl p-8 flex flex-col items-center justify-center
-                transition-all duration-300 cursor-pointer border 
+                transition-all duration-300 cursor-pointer border
                   ${isDark
                     ? "bg-gray-800/60 border-gray-700 text-gray-300 hover:bg-gray-700 hover:border-blue-500"
                     : "bg-white border-gray-200 text-gray-700 hover:bg-gray-100"
@@ -219,7 +219,7 @@ export default function Skills({ isDark }) {
         </div>
 
         {/* Specialties Section */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-20">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-7 mt-20">
 
           {specialties.map((item, index) => {
             const Icon = item.icon;
@@ -243,25 +243,25 @@ export default function Skills({ isDark }) {
                     : "bg-white border-gray-200 hover:border-cyan-400 hover:shadow-xl"
                   }`}
               >
-                <Icon className="text-5xl text-cyan-400 mb-6 transition-all duration-300 group-hover:scale-110 group-hover:drop-shadow-[0_0_20px_#22d3ee]" />
+                <Icon className="text-5xl text-cyan-400 mb-4 transition-all duration-300 group-hover:scale-110 group-hover:drop-shadow-[0_0_20px_#22d3ee]" />
 
-                <h3 className={`text-2xl font-bold mb-4 ${isDark ? "text-white" : "text-gray-900"
+                <h3 className={`text-1xl font-bold mb-3 ${isDark ? "text-white" : "text-gray-900"
                   }`}
                 >
                   {item.title}
                 </h3>
 
-                <p className={`leading-7 mb-6 ${isDark ? "text-gray-400" : "text-gray-600"
+                <p className={`leading-6 mb-5 ${isDark ? "text-gray-400" : "text-gray-600"
                   }`}
                 >
                   {item.description}
                 </p>
 
-                <div className="flex flex-wrap gap-3">
+                <div className="flex flex-wrap gap-2">
                   {item.skills.map((skill) => (
                     <span
                       key={skill}
-                      className={`px-4 py-2 rounded-full text-sm font-medium border
+                      className={`px-3 py-1 rounded-full text-sm font-medium border
                      ${isDark
                           ? "bg-cyan-500/10 text-cyan-300 border-cyan-500/20"
                           : "bg-cyan-50 text-cyan-700 border-cyan-200"
