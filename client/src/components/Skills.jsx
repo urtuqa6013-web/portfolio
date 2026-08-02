@@ -1,94 +1,159 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { HiStar } from 'react-icons/hi';
+import { motion } from "framer-motion";
 import {
   FaReact,
-  FaNode,
-  FaDatabase,
+  FaNodeJs,
+  FaHtml5,
+  FaCss3Alt,
   FaGitAlt,
-  FaPython,
-  FaDocker,
   FaLinux,
-  FaCode,
   FaPalette,
-  FaTools,
   FaCog,
   FaLaptopCode,
-} from 'react-icons/fa';
-import { SiMongodb, SiExpress, SiTailwindcss, SiJavascript, SiVite, SiPostman } from 'react-icons/si';
+  FaAws,
+} from "react-icons/fa";
+
+import {
+  SiExpress,
+  SiMongodb,
+  SiJavascript,
+  SiTailwindcss,
+  SiJsonwebtokens,
+  SiPostman,
+  SiVite,
+  SiPostgresql,
+  SiFramer,
+  SiBootstrap,
+  SiApifox,
+} from "react-icons/si";
 
 
-const Skills = ({ isDark }) => {
-  const [selectedCategory, setSelectedCategory] = useState('frontend');
+const skills = [
+  {
+    name: "React",
+    icon: FaReact,
+    color: "text-cyan-400",
+  },
+  {
+    name: "Node.js",
+    icon: FaNodeJs,
+    color: "text-green-500",
+  },
+  {
+    name: "Express.js",
+    icon: SiExpress,
+    color: "text-gray-300",
+  },
+  {
+    name: "MongoDB",
+    icon: SiMongodb,
+    color: "text-green-500",
+  },
+  {
+    name: "JavaScript",
+    icon: SiJavascript,
+    color: "text-yellow-400",
+  },
+  {
+    name: "HTML5",
+    icon: FaHtml5,
+    color: "text-orange-500",
+  },
+  {
+    name: "CSS3",
+    icon: FaCss3Alt,
+    color: "text-blue-500",
+  },
+  {
+    name: "Tailwind CSS",
+    icon: SiTailwindcss,
+    color: "text-sky-400",
+  },
+  {
+    name: "Bootstrap",
+    icon: SiBootstrap,
+    color: "text-purple-500",
+  },
+  {
+    name: "Git & GitHub",
+    icon: FaGitAlt,
+    color: "text-orange-500",
+  },
+  {
+    name: "JWT",
+    icon: SiJsonwebtokens,
+    color: "text-pink-500",
+  },
+  {
+    name: "Postman",
+    icon: SiPostman,
+    color: "text-orange-400",
+  },
+  {
+    name: "Vite",
+    icon: SiVite,
+    color: "text-purple-400",
+  },
+  {
+    name: "AWS",
+    icon: FaAws,
+    color: "text-yellow-500",
+  },
+  {
+    name: "Linux",
+    icon: FaLinux,
+    color: "text-yellow-300",
+  },
+  {
+    name: "PostgreSQL",
+    icon: SiPostgresql,
+    color: "text-blue-400",
+  },
+  {
+    name: "REST API",
+    icon: SiApifox,
+    color: "text-cyan-300",
+  },
+  {
+    name: "Framer Motion",
+    icon: SiFramer,
+    color:"text-gray-300",
+  },
+];
 
-  const skillCategories = {
-    frontend: {
-      title: 'Frontend',
-      icon: FaPalette,
-      skills: [
-        { name: 'React', proficiency: 95, icon: FaReact },
-        { name: 'JavaScript', proficiency: 90, icon: SiJavascript },
-        { name: 'Tailwind CSS', proficiency: 92, icon: SiTailwindcss },
-        { name: 'Framer Motion', proficiency: 88, icon: FaCode },
-        { name: 'HTML/CSS', proficiency: 95, icon: FaCode },
-      ],
-    },
-    backend: {
-      title: 'Backend',
-      icon: FaCog,
-      skills: [
-        { name: 'Node.js', proficiency: 90, icon: FaNode },
-        { name: 'Express.js', proficiency: 88, icon: SiExpress },
-        { name: 'MongoDB', proficiency: 87, icon: SiMongodb },
-        { name: 'PostgreSQL', proficiency: 80, icon: FaDatabase },
-        { name: 'REST APIs', proficiency: 92, icon: FaCode },
-      ],
-    },
-    tools: {
-      title: 'Tools & Others',
-      icon: FaTools,
-      skills: [
-        { name: 'Git', proficiency: 90, icon: FaGitAlt },
-        { name: 'Postman', proficiency: 82, icon: SiPostman },
-        { name: 'Linux', proficiency: 85, icon: FaLinux },
-        { name: 'Vite', proficiency: 78, icon: SiVite },
-        { name: 'AWS', proficiency: 75, icon: FaCode },
-      ],
-    },
-  };
+const specialties = [
+  {
+    title: "Frontend Development",
+    description:
+      "Building modern, responsive, and interactive user interfaces with React and modern CSS.",
+    skills: ["React", "Tailwind", "Framer Motion"],
+    icon: FaPalette,
+  },
+  {
+    title: "Backend Development",
+    description:
+      "Developing secure REST APIs and scalable backend applications using Node.js and Express.",
+    skills: ["Node.js", "Express", "MongoDB"],
+    icon: FaCog,
+  },
+  {
+    title: "Full-Stack Development",
+    description:
+      "Creating complete MERN applications from frontend UI to backend APIs and databases.",
+    skills: ["MERN", "REST API", "JWT"],
+    icon: FaLaptopCode,
+  },
+];
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.3,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5 },
-    },
-  };
-
-  const progressVariants = {
-    hidden: { width: 0 },
-    visible: (custom) => ({
-      width: `${custom}%`,
-      transition: { duration: 1.5, ease: 'easeOut' },
-    }),
-  };
-
+export default function Skills({ isDark }) {
   return (
-    <section id="skills" className="min-h-screen py-20 px-6 overflow-hidden">
+    <section
+      id="skills"
+      className={`min-h-screen py-20 px-6 overflow-hidden transition-all duration-500
+         
+        }`}
+    >
       <div className="max-w-6xl mx-auto">
-        {/* Section Title */}
+
         <motion.div
           className="mb-16 text-center"
           initial={{ opacity: 0 }}
@@ -108,234 +173,167 @@ const Skills = ({ isDark }) => {
           </p>
         </motion.div>
 
-        {/* Category Tabs */}
-        <motion.div
-          className="flex flex-wrap justify-center gap-4 mb-16"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
+        <div className={`grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 ${isDark ? 'text-blue-400' : 'text-blue-600'
+          }`}
         >
-          {Object.entries(skillCategories).map(([key, category]) => {
-            const CategoryIcon = category.icon;
-            return (
-              <motion.button
-                key={key}
-                onClick={() => setSelectedCategory(key)}
-                
-                className={`px-8 py-4 rounded-2xl font-semibold flex items-center gap-3 transition-all duration-300 border ${selectedCategory === key
-                  ? "bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 text-white shadow-2xl shadow-blue-500/40 border-transparent"
-                  : isDark
-                    ? "bg-gray-800/60 border-gray-700 text-gray-300 hover:bg-gray-700 hover:border-blue-500"
-                    : "bg-white border-gray-200 text-gray-700 hover:bg-gray-100"
-                  }`}
-                variants={itemVariants}
-                whileHover={{ y: -5, scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
 
-
-                <CategoryIcon className="text-2xl" />
-                <span>{category.title}</span>
-              </motion.button>
-            )
-          })}
-        </motion.div>
-
-        {/* Skills Grid */}
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-        >
-          {skillCategories[selectedCategory].skills.map((skill, index) => {
-            const IconComponent = skill.icon;
+          {skills.map((skill, index) => {
+            const Icon = skill.icon;
 
             return (
               <motion.div
                 key={skill.name}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 20 }}
-                transition={{ delay: index * 0.1 }}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{
+                  delay: index * 0.06,
+                  duration: 0.5,
+                }}
+                animate={{
+                  y: [0, -5, 0],
+                }}
+                whileHover={{
+                  y: -10,
+                  scale: 1.05,
+                }}
+                className={`group rounded-xl p-8 flex flex-col items-center justify-center
+                transition-all duration-300 cursor-pointer border 
+                  ${isDark
+                    ? "bg-gray-800/60 border-gray-700 text-gray-300 hover:bg-gray-700 hover:border-blue-500"
+                    : "bg-white border-gray-200 text-gray-700 hover:bg-gray-100"
+                  }`}
               >
-                <motion.div
-                  className={`p-6 rounded-lg backdrop-blur-md border ${isDark
-                    ? 'bg-gray-800/50 border-gray-700/50 hover:bg-gray-800/80'
-                    : 'bg-white/50 border-gray-200/50 hover:bg-white/80'
-                    } transition-all`}
-                  whileHover={{ y: -10 }}
-                >
-                  {/* Header */}
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center gap-3">
-                      <motion.div
-                        className={`p-3 rounded-lg ${isDark
-                          ? 'bg-blue-500/20'
-                          : 'bg-blue-400/20'
-                          }`}
-                        animate={{ rotate: [0, 5, -5, 0] }}
-                        transition={{ duration: 3, repeat: Infinity }}
-                      >
-                        <IconComponent
-                          className={`text-2xl ${isDark ? 'text-blue-400' : 'text-blue-600'
-                            }`} />
-                      </motion.div>
-                      <h4 className="text-lg font-bold">{skill.name}</h4>
-                    </div>
-                    <motion.div
-                      className="font-bold text-lg bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent"
-                      initial={{ opacity: 0 }}
-                      whileInView={{ opacity: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.5 }}
-                    >
-                      {skill.proficiency}%
-                    </motion.div>
-                  </div>
+                <Icon
+                  className={`text-5xl ${skill.color} mb-5 transition-all duration-300 group-hover:scale-110 group-hover:drop-shadow-[0_0_20px_currentColor]`}
+                />
 
-                  {/* Progress Bar */}
-                  <div className={`h-3 rounded-full overflow-hidden ${isDark ? 'bg-gray-700' : 'bg-gray-300'
-                    }`}>
-                    <motion.div
-                      className="h-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full"
-                      custom={skill.proficiency}
-                      variants={progressVariants}
-                      initial="hidden"
-                      whileInView="visible"
-                      viewport={{ once: true, amount: 0.5 }}
-                    />
-                  </div>
-
-                  {/* Stars */}
-                  <div className="flex gap-1 mt-4">
-                    {[...Array(5)].map((_, i) => (
-                      <motion.div
-                        key={i}
-                        initial={{ opacity: 0, scale: 0 }}
-                        whileInView={{ opacity: i * 20 < skill.proficiency ? 1 : 0.2, scale: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: i * 0.1 }}
-                      >
-                        <HiStar
-                          className={`text-lg ${i * 20 < skill.proficiency
-                            ? 'text-yellow-400'
-                            : isDark
-                              ? 'text-gray-600'
-                              : 'text-gray-400'
-                            }`}
-                        />
-                      </motion.div>
-                    ))}
-                  </div>
-                </motion.div>
+                <h3 className={` mt-4text-center font-semibold ${isDark ? 'text-gray-400' : 'text-gray-600'
+                  }`}>
+                  {skill.name}
+                </h3>
               </motion.div>
             );
           })}
-        </motion.div>
 
-        {/* Skills Highlight Cards */}
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          {[
-            {
-              title: 'Frontend Development',
-              description: 'Creating beautiful and responsive user interfaces with React and modern CSS',
-              skills: ['React', 'Tailwind', 'Framer Motion'],
-              icon: FaPalette,
-            },
-            {
-              title: 'Backend Development',
-              description: 'Building scalable server-side applications with Node.js and Express',
-              skills: ['Node.js', 'Express', 'MongoDB'],
-              icon: FaCog,
-            },
-            {
-              title: 'Full-Stack Solutions',
-              description: 'End-to-end development of complete web applications',
-              skills: ['MERN', 'APIs', 'Databases'],
-              icon: FaLaptopCode,
-            },
-          ].map((specialty, index) => (
-            <motion.div
-              key={index}
-              variants={itemVariants}
-              className={`p-8 rounded-xl backdrop-blur-md border ${isDark
-                ? 'bg-gray-800/50 border-gray-700/50 hover:bg-gray-800/80'
-                : 'bg-white/50 border-gray-200/50 hover:bg-white/80'
-                } transition-all`}
-              whileHover={{ y: -20 }}
-            >
+        </div>
 
+        {/* Specialties Section */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-20">
+
+          {specialties.map((item, index) => {
+            const Icon = item.icon;
+
+            return (
               <motion.div
-                className="text-5xl mb-4"
-                animate={{ scale: [1, 1.2, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
+                key={index}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{
+                  delay: index * 0.2,
+                }}
+                whileHover={{
+                  y: -10,
+                  scale: 1.03,
+                }}
+                className={`group rounded-2xl p-8 transition-all duration-300 border
+                ${isDark
+                    ? "bg-[#0f1b32] border-cyan-500/20 hover:border-cyan-400 hover:shadow-[0_0_30px_rgba(34,211,238,0.25)]"
+                    : "bg-white border-gray-200 hover:border-cyan-400 hover:shadow-xl"
+                  }`}
               >
-                <specialty.icon className={isDark ? "text-blue-400" : "text-blue-600"} />
-              </motion.div>
-              <h3 className="text-xl font-bold mb-3">{specialty.title}</h3>
-              <p className={`mb-4 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                {specialty.description}
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {specialty.skills.map((skill, i) => (
-                  <motion.span
-                    key={i}
-                    className={`px-3 py-1 rounded-full text-xs font-semibold ${isDark
-                      ? 'bg-blue-500/20 text-blue-300'
-                      : 'bg-blue-400/20 text-blue-700'
-                      }`}
-                    whileHover={{ scale: 1.1 }}
-                  >
-                    {skill}
-                  </motion.span>
-                ))}
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
+                <Icon className="text-5xl text-cyan-400 mb-6 transition-all duration-300 group-hover:scale-110 group-hover:drop-shadow-[0_0_20px_#22d3ee]" />
 
-        {/* Learning Section */}
+                <h3 className={`text-2xl font-bold mb-4 ${isDark ? "text-white" : "text-gray-900"
+                  }`}
+                >
+                  {item.title}
+                </h3>
+
+                <p className={`leading-7 mb-6 ${isDark ? "text-gray-400" : "text-gray-600"
+                  }`}
+                >
+                  {item.description}
+                </p>
+
+                <div className="flex flex-wrap gap-3">
+                  {item.skills.map((skill) => (
+                    <span
+                      key={skill}
+                      className={`px-4 py-2 rounded-full text-sm font-medium border
+                     ${isDark
+                          ? "bg-cyan-500/10 text-cyan-300 border-cyan-500/20"
+                          : "bg-cyan-50 text-cyan-700 border-cyan-200"
+                        }`}
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+
+              </motion.div>
+            );
+          })}
+
+        </div>
+
+        {/* Always Learning */}
         <motion.div
-          className={`p-8 rounded-xl backdrop-blur-md border text-center ${isDark
-            ? 'bg-gradient-to-r from-blue-500/10 to-purple-600/10 border-blue-500/30'
-            : 'bg-gradient-to-r from-blue-400/10 to-purple-500/10 border-blue-400/30'
-            }`}
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
+          className={`mt-24 rounded-3xl border p-10 text-center
+             ${isDark
+              ? "border-cyan-500/20 bg-gradient-to-r from-cyan-500/10 via-blue-500/10 to-purple-500/10"
+              : "border-cyan-200 bg-gradient-to-r from-cyan-50 via-blue-50 to-purple-50"
+            }`}
         >
-          <h3 className="text-2xl font-bold mb-4">Always Learning</h3>
-          <p className={`mb-6 max-w-2xl mx-auto ${isDark ? 'text-gray-300' : 'text-gray-700'
-            }`}>
-            I'm constantly staying updated with the latest technologies and trends in web development.
-            Currently exploring: TypeScript, Next.js, GraphQL, and Cloud Technologies
+          <h2 className={`text-3xl font-bold mb-5 ${isDark ? "text-white" : "text-gray-900"
+            }`}
+          >
+            Always Learning
+          </h2>
+
+          <p className={`max-w-3xl mx-auto leading-8 ${isDark ? "text-gray-300" : "text-gray-700"
+            }`}
+          >
+            I continuously improve my skills by learning modern technologies,
+            building real-world MERN applications, and exploring best practices
+            in full-stack web development.
           </p>
-          <div className="flex flex-wrap justify-center gap-3">
-            {['TypeScript', 'Next.js', 'GraphQL', 'AWS', 'Docker'].map((tech) => (
+
+          <div className="flex flex-wrap justify-center gap-4 mt-8">
+
+            {[
+              "TypeScript",
+              "Next.js",
+              "GraphQL",
+              "AWS",
+              "Docker",
+              "Redis",
+              "CI/CD",
+              "System Design",
+            ].map((tech) => (
               <motion.span
                 key={tech}
-                className={`px-4 py-2 rounded-full font-semibold ${isDark
-                  ? 'bg-blue-500/20 text-blue-300'
-                  : 'bg-blue-400/20 text-blue-700'
+                whileHover={{
+                  scale: 1.1,
+                }}
+                className={`px-5 py-2 rounded-full font-medium border
+                      ${isDark
+                    ? "bg-cyan-500/10 text-cyan-300 border-cyan-500/20"
+                    : "bg-cyan-50 text-cyan-700 border-cyan-200"
                   }`}
-                whileHover={{ scale: 1.1 }}
               >
                 {tech}
               </motion.span>
             ))}
+
           </div>
         </motion.div>
+
       </div>
     </section>
   );
-};
-
-export default Skills;
+}
