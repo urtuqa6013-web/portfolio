@@ -10,8 +10,13 @@ import {
   FaDocker,
   FaLinux,
   FaCode,
+  FaPalette,
+  FaTools,
+  FaCog,
+  FaLaptopCode,
 } from 'react-icons/fa';
 import { SiMongodb, SiExpress, SiTailwindcss, SiJavascript, SiVite, SiPostman } from 'react-icons/si';
+
 
 const Skills = ({ isDark }) => {
   const [selectedCategory, setSelectedCategory] = useState('frontend');
@@ -19,7 +24,7 @@ const Skills = ({ isDark }) => {
   const skillCategories = {
     frontend: {
       title: 'Frontend',
-      icon: '🎨',
+      icon: FaPalette,
       skills: [
         { name: 'React', proficiency: 95, icon: FaReact },
         { name: 'JavaScript', proficiency: 90, icon: SiJavascript },
@@ -30,7 +35,7 @@ const Skills = ({ isDark }) => {
     },
     backend: {
       title: 'Backend',
-      icon: '⚙️',
+      icon: FaCog,
       skills: [
         { name: 'Node.js', proficiency: 90, icon: FaNode },
         { name: 'Express.js', proficiency: 88, icon: SiExpress },
@@ -41,7 +46,7 @@ const Skills = ({ isDark }) => {
     },
     tools: {
       title: 'Tools & Others',
-      icon: '🛠️',
+      icon: FaTools,
       skills: [
         { name: 'Git', proficiency: 90, icon: FaGitAlt },
         { name: 'Postman', proficiency: 82, icon: SiPostman },
@@ -90,17 +95,15 @@ const Skills = ({ isDark }) => {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
         >
-          <p className={`text-lg font-semibold mb-4 ${
-            isDark ? 'text-blue-400' : 'text-blue-600'
-          }`}>
+          <p className={`text-lg font-semibold mb-4 ${isDark ? 'text-blue-400' : 'text-blue-600'
+            }`}>
             My Skills
           </p>
           <h2 className="text-5xl md:text-6xl font-bold mb-6">
             Technologies & Tools
           </h2>
-          <p className={`text-lg max-w-2xl mx-auto ${
-            isDark ? 'text-gray-400' : 'text-gray-600'
-          }`}>
+          <p className={`text-lg max-w-2xl mx-auto ${isDark ? 'text-gray-400' : 'text-gray-600'
+            }`}>
             Here's a showcase of my technical skills and expertise
           </p>
         </motion.div>
@@ -113,27 +116,30 @@ const Skills = ({ isDark }) => {
           whileInView="visible"
           viewport={{ once: true }}
         >
-          {Object.entries(skillCategories).map(([key, category]) => (
-            <motion.button
-              key={key}
-              onClick={() => setSelectedCategory(key)}
-              className={`px-6 py-3 rounded-full font-semibold flex items-center gap-2 transition-all ${
-                selectedCategory === key
-                  ? isDark
-                    ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg shadow-blue-500/50'
-                    : 'bg-gradient-to-r from-blue-400 to-purple-500 text-white shadow-lg shadow-blue-400/50'
+          {Object.entries(skillCategories).map(([key, category]) => {
+            const CategoryIcon = category.icon;
+            return (
+              <motion.button
+                key={key}
+                onClick={() => setSelectedCategory(key)}
+                
+                className={`px-8 py-4 rounded-2xl font-semibold flex items-center gap-3 transition-all duration-300 border ${selectedCategory === key
+                  ? "bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 text-white shadow-2xl shadow-blue-500/40 border-transparent"
                   : isDark
-                  ? 'bg-gray-800 text-gray-300 hover:bg-gray-700'
-                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-              }`}
-              variants={itemVariants}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <span className="text-xl">{category.icon}</span>
-              {category.title}
-            </motion.button>
-          ))}
+                    ? "bg-gray-800/60 border-gray-700 text-gray-300 hover:bg-gray-700 hover:border-blue-500"
+                    : "bg-white border-gray-200 text-gray-700 hover:bg-gray-100"
+                  }`}
+                variants={itemVariants}
+                whileHover={{ y: -5, scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+
+
+                <CategoryIcon className="text-2xl" />
+                <span>{category.title}</span>
+              </motion.button>
+            )
+          })}
         </motion.div>
 
         {/* Skills Grid */}
@@ -145,6 +151,7 @@ const Skills = ({ isDark }) => {
         >
           {skillCategories[selectedCategory].skills.map((skill, index) => {
             const IconComponent = skill.icon;
+
             return (
               <motion.div
                 key={skill.name}
@@ -154,28 +161,26 @@ const Skills = ({ isDark }) => {
                 transition={{ delay: index * 0.1 }}
               >
                 <motion.div
-                  className={`p-6 rounded-lg backdrop-blur-md border ${
-                    isDark
-                      ? 'bg-gray-800/50 border-gray-700/50 hover:bg-gray-800/80'
-                      : 'bg-white/50 border-gray-200/50 hover:bg-white/80'
-                  } transition-all`}
+                  className={`p-6 rounded-lg backdrop-blur-md border ${isDark
+                    ? 'bg-gray-800/50 border-gray-700/50 hover:bg-gray-800/80'
+                    : 'bg-white/50 border-gray-200/50 hover:bg-white/80'
+                    } transition-all`}
                   whileHover={{ y: -10 }}
                 >
                   {/* Header */}
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-3">
                       <motion.div
-                        className={`p-3 rounded-lg ${
-                          isDark
-                            ? 'bg-blue-500/20'
-                            : 'bg-blue-400/20'
-                        }`}
+                        className={`p-3 rounded-lg ${isDark
+                          ? 'bg-blue-500/20'
+                          : 'bg-blue-400/20'
+                          }`}
                         animate={{ rotate: [0, 5, -5, 0] }}
                         transition={{ duration: 3, repeat: Infinity }}
                       >
-                        <IconComponent className={`text-2xl ${
-                          isDark ? 'text-blue-400' : 'text-blue-600'
-                        }`} />
+                        <IconComponent
+                          className={`text-2xl ${isDark ? 'text-blue-400' : 'text-blue-600'
+                            }`} />
                       </motion.div>
                       <h4 className="text-lg font-bold">{skill.name}</h4>
                     </div>
@@ -191,9 +196,8 @@ const Skills = ({ isDark }) => {
                   </div>
 
                   {/* Progress Bar */}
-                  <div className={`h-3 rounded-full overflow-hidden ${
-                    isDark ? 'bg-gray-700' : 'bg-gray-300'
-                  }`}>
+                  <div className={`h-3 rounded-full overflow-hidden ${isDark ? 'bg-gray-700' : 'bg-gray-300'
+                    }`}>
                     <motion.div
                       className="h-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full"
                       custom={skill.proficiency}
@@ -215,13 +219,12 @@ const Skills = ({ isDark }) => {
                         transition={{ delay: i * 0.1 }}
                       >
                         <HiStar
-                          className={`text-lg ${
-                            i * 20 < skill.proficiency
-                              ? 'text-yellow-400'
-                              : isDark
+                          className={`text-lg ${i * 20 < skill.proficiency
+                            ? 'text-yellow-400'
+                            : isDark
                               ? 'text-gray-600'
                               : 'text-gray-400'
-                          }`}
+                            }`}
                         />
                       </motion.div>
                     ))}
@@ -245,37 +248,37 @@ const Skills = ({ isDark }) => {
               title: 'Frontend Development',
               description: 'Creating beautiful and responsive user interfaces with React and modern CSS',
               skills: ['React', 'Tailwind', 'Framer Motion'],
-              icon: '🎨',
+              icon: FaPalette,
             },
             {
               title: 'Backend Development',
               description: 'Building scalable server-side applications with Node.js and Express',
               skills: ['Node.js', 'Express', 'MongoDB'],
-              icon: '⚙️',
+              icon: FaCog,
             },
             {
               title: 'Full-Stack Solutions',
               description: 'End-to-end development of complete web applications',
               skills: ['MERN', 'APIs', 'Databases'],
-              icon: '🚀',
+              icon: FaLaptopCode,
             },
           ].map((specialty, index) => (
             <motion.div
               key={index}
               variants={itemVariants}
-              className={`p-8 rounded-xl backdrop-blur-md border ${
-                isDark
-                  ? 'bg-gray-800/50 border-gray-700/50 hover:bg-gray-800/80'
-                  : 'bg-white/50 border-gray-200/50 hover:bg-white/80'
-              } transition-all`}
+              className={`p-8 rounded-xl backdrop-blur-md border ${isDark
+                ? 'bg-gray-800/50 border-gray-700/50 hover:bg-gray-800/80'
+                : 'bg-white/50 border-gray-200/50 hover:bg-white/80'
+                } transition-all`}
               whileHover={{ y: -20 }}
             >
+
               <motion.div
                 className="text-5xl mb-4"
                 animate={{ scale: [1, 1.2, 1] }}
                 transition={{ duration: 2, repeat: Infinity }}
               >
-                {specialty.icon}
+                <specialty.icon className={isDark ? "text-blue-400" : "text-blue-600"} />
               </motion.div>
               <h3 className="text-xl font-bold mb-3">{specialty.title}</h3>
               <p className={`mb-4 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
@@ -285,11 +288,10 @@ const Skills = ({ isDark }) => {
                 {specialty.skills.map((skill, i) => (
                   <motion.span
                     key={i}
-                    className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                      isDark
-                        ? 'bg-blue-500/20 text-blue-300'
-                        : 'bg-blue-400/20 text-blue-700'
-                    }`}
+                    className={`px-3 py-1 rounded-full text-xs font-semibold ${isDark
+                      ? 'bg-blue-500/20 text-blue-300'
+                      : 'bg-blue-400/20 text-blue-700'
+                      }`}
                     whileHover={{ scale: 1.1 }}
                   >
                     {skill}
@@ -302,19 +304,17 @@ const Skills = ({ isDark }) => {
 
         {/* Learning Section */}
         <motion.div
-          className={`p-8 rounded-xl backdrop-blur-md border text-center ${
-            isDark
-              ? 'bg-gradient-to-r from-blue-500/10 to-purple-600/10 border-blue-500/30'
-              : 'bg-gradient-to-r from-blue-400/10 to-purple-500/10 border-blue-400/30'
-          }`}
+          className={`p-8 rounded-xl backdrop-blur-md border text-center ${isDark
+            ? 'bg-gradient-to-r from-blue-500/10 to-purple-600/10 border-blue-500/30'
+            : 'bg-gradient-to-r from-blue-400/10 to-purple-500/10 border-blue-400/30'
+            }`}
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
         >
           <h3 className="text-2xl font-bold mb-4">Always Learning</h3>
-          <p className={`mb-6 max-w-2xl mx-auto ${
-            isDark ? 'text-gray-300' : 'text-gray-700'
-          }`}>
+          <p className={`mb-6 max-w-2xl mx-auto ${isDark ? 'text-gray-300' : 'text-gray-700'
+            }`}>
             I'm constantly staying updated with the latest technologies and trends in web development.
             Currently exploring: TypeScript, Next.js, GraphQL, and Cloud Technologies
           </p>
@@ -322,11 +322,10 @@ const Skills = ({ isDark }) => {
             {['TypeScript', 'Next.js', 'GraphQL', 'AWS', 'Docker'].map((tech) => (
               <motion.span
                 key={tech}
-                className={`px-4 py-2 rounded-full font-semibold ${
-                  isDark
-                    ? 'bg-blue-500/20 text-blue-300'
-                    : 'bg-blue-400/20 text-blue-700'
-                }`}
+                className={`px-4 py-2 rounded-full font-semibold ${isDark
+                  ? 'bg-blue-500/20 text-blue-300'
+                  : 'bg-blue-400/20 text-blue-700'
+                  }`}
                 whileHover={{ scale: 1.1 }}
               >
                 {tech}

@@ -1,6 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { HiCheckCircle } from 'react-icons/hi';
+import {
+  HiOutlineFolderOpen,
+  HiOutlineUserGroup,
+  HiOutlineBriefcase,
+  HiOutlineCodeBracket,
+} from "react-icons/hi2";
 
 const About = ({ isDark }) => {
   const experiences = [
@@ -28,10 +34,10 @@ const About = ({ isDark }) => {
   ];
 
   const stats = [
-    { label: 'Projects Completed', value: '10+', icon: '📁' },
-    { label: 'Happy Clients', value: '10+', icon: '😊' },
-    { label: 'Years Experience', value: '3+', icon: '⏱️' },
-    { label: 'Code Commits', value: '100+', icon: '📝' },
+    { label: 'Projects Completed', value: '10+', icon: HiOutlineFolderOpen },
+    { label: 'Happy Clients', value: '10+', icon: HiOutlineUserGroup },
+    { label: 'Years Experience', value: '3+', icon: HiOutlineBriefcase },
+    { label: 'Code Commits', value: '100+', icon: HiOutlineCodeBracket },
   ];
 
   const containerVariants = {
@@ -99,7 +105,9 @@ const About = ({ isDark }) => {
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
         >
-          {stats.map((stat, index) => (
+          {stats.map((stat, index) => {
+            const Icon = stat.icon;
+            return (
             <motion.div
               key={index}
               className={`p-6 rounded-xl backdrop-blur-md border transition-all ${
@@ -115,7 +123,7 @@ const About = ({ isDark }) => {
                 animate={{ scale: [1, 1.2, 1] }}
                 transition={{ duration: 2, repeat: Infinity }}
               >
-                {stat.icon}
+                <Icon className="text-3xl text-blue-400" />
               </motion.div>
               <motion.p
                 className="text-3xl font-bold bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent mb-2"
@@ -130,7 +138,8 @@ const About = ({ isDark }) => {
                 {stat.label}
               </p>
             </motion.div>
-          ))}
+            )
+           })}
         </motion.div>
 
         {/* Timeline */}

@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { HiCheckCircle, HiExclamationCircle } from 'react-icons/hi';
-import { FiMail, FiPhone, FiMapPin } from 'react-icons/fi';
+import { FiMail, FiPhone, FiMapPin, FiLinkedin, FiGithub } from 'react-icons/fi';
 
 const Contact = ({ isDark }) => {
   const [formData, setFormData] = useState({
@@ -23,7 +23,7 @@ const Contact = ({ isDark }) => {
     }));
   };
 
-    const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
 
@@ -35,10 +35,10 @@ const Contact = ({ isDark }) => {
     }
 
     try {
-     
+
       // Send data to your backend API
       const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}/api/contact`, 
+        `${import.meta.env.VITE_API_URL}/api/contact`,
         formData
       );
 
@@ -106,17 +106,15 @@ const Contact = ({ isDark }) => {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
         >
-          <p className={`text-lg font-semibold mb-4 ${
-            isDark ? 'text-blue-400' : 'text-blue-600'
-          }`}>
+          <p className={`text-lg font-semibold mb-4 ${isDark ? 'text-blue-400' : 'text-blue-600'
+            }`}>
             Get In Touch
           </p>
           <h2 className="text-5xl md:text-6xl font-bold mb-6">
             Let's Work Together
           </h2>
-          <p className={`text-lg max-w-2xl mx-auto ${
-            isDark ? 'text-gray-400' : 'text-gray-600'
-          }`}>
+          <p className={`text-lg max-w-2xl mx-auto ${isDark ? 'text-gray-400' : 'text-gray-600'
+            }`}>
             Have a project in mind or want to discuss opportunities? I'd love to hear from you!
           </p>
         </motion.div>
@@ -138,26 +136,23 @@ const Contact = ({ isDark }) => {
                   key={index}
                   href={info.href}
                   variants={itemVariants}
-                  className={`p-6 rounded-lg  border transition-all ${
-                    isDark
+                  className={`p-6 rounded-lg  border transition-all ${isDark
                       ? 'bg-gray-800/50 border-gray-700/50 hover:bg-gray-800/80'
                       : 'bg-white/50 border-gray-200/50 hover:bg-white/80'
-                  }`}
+                    }`}
                   whileHover={{ x: 10 }}
                 >
                   <div className="flex items-start gap-4">
                     <motion.div
-                      className={`p-3 rounded-lg ${
-                        isDark
+                      className={`p-3 rounded-lg ${isDark
                           ? 'bg-blue-500/20'
                           : 'bg-blue-400/20'
-                      }`}
+                        }`}
                       animate={{ rotate: [0, 10, -10, 0] }}
                       transition={{ duration: 3, repeat: Infinity }}
                     >
-                      <IconComponent className={`text-2xl ${
-                        isDark ? 'text-blue-400' : 'text-blue-600'
-                      }`} />
+                      <IconComponent className={`text-2xl ${isDark ? 'text-blue-400' : 'text-blue-600'
+                        }`} />
                     </motion.div>
                     <div>
                       <h4 className="font-bold text-lg mb-1">{info.label}</h4>
@@ -172,35 +167,45 @@ const Contact = ({ isDark }) => {
 
             {/* Social Links */}
             <motion.div
-              className={`p-6 rounded-lg backdrop-blur-md border ${
-                isDark
+              className={`p-6 rounded-lg backdrop-blur-md border ${isDark
                   ? 'bg-gray-800/50 border-gray-700/50'
                   : 'bg-white/50 border-gray-200/50'
-              }`}
+                }`}
               variants={itemVariants}
             >
               <h4 className="font-bold text-lg mb-4">Connect With Me</h4>
-              <div className="flex gap-4">
+              <div className="flex gap-4 mt-4">
                 {[
-                  { name: 'LinkedIn', url: 'https://www.linkedin.com/in/urwa-tul-wusqa-39029341b/', icon: '💼' },
-                  { name: 'GitHub', url: 'https://github.com', icon: '🐙' },
-                  { name: 'Gmail', url: 'https://mail.google.com/mail/?view=cm&fs=1&to=urtuqa6013@gmail.com', icon: '📧' },
+                  {
+                    name: "LinkedIn",
+                    url: "https://www.linkedin.com/in/urwa-tul-wusqa-39029341b/",
+                    icon: FiLinkedin,
+                  },
+                  {
+                    name: "GitHub",
+                    url: "https://github.com/urtuqa6013-web",
+                    icon: FiGithub,
+                  },
+                  {
+                    name: "Gmail",
+                    url: "mailto:urtuqa6013@gmail.com",
+                    icon: FiMail,
+                  },
                 ].map((social) => (
                   <motion.a
                     key={social.name}
                     href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`w-12 h-12 rounded-full flex items-center justify-center text-xl transition-all ${
-                      isDark
-                        ? 'bg-gray-700 hover:bg-blue-600'
-                        : 'bg-gray-300 hover:bg-blue-400'
-                    }`}
-                    whileHover={{ scale: 1.2, rotate: 10 }}
-                    whileTap={{ scale: 0.9 }}
-                    title={social.name}
+                    whileHover={{ y: -5, scale: 1.08 }}
+                    whileTap={{ scale: 0.95 }}
+                    className={`w-14 h-14 rounded-xl flex items-center justify-center transition-all duration-300
+                   ${isDark
+                        ? "bg-gray-800/60 border border-gray-700 text-blue-400 hover:bg-blue-600 hover:text-white"
+                        : "bg-white/60 border border-gray-200 text-blue-600 hover:bg-blue-500 hover:text-white"
+                      } backdrop-blur-md shadow-lg`}
                   >
-                    {social.icon}
+                    <social.icon size={24} />
                   </motion.a>
                 ))}
               </div>
@@ -210,11 +215,10 @@ const Contact = ({ isDark }) => {
           {/* Contact Form */}
           <motion.form
             onSubmit={handleSubmit}
-            className={`lg:col-span-2 p-8 rounded-lg backdrop-blur-md border ${
-              isDark
+            className={`lg:col-span-2 p-8 rounded-lg backdrop-blur-md border ${isDark
                 ? 'bg-gray-800/50 border-gray-700/50'
                 : 'bg-white/50 border-gray-200/50'
-            }`}
+              }`}
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -234,11 +238,10 @@ const Contact = ({ isDark }) => {
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className={`w-full px-4 py-3 rounded-lg focus:outline-none transition-all ${
-                    isDark
+                  className={`w-full px-4 py-3 rounded-lg focus:outline-none transition-all ${isDark
                       ? 'bg-gray-700 border border-gray-600 focus:border-blue-500 text-white'
                       : 'bg-gray-100 border border-gray-300 focus:border-blue-400'
-                  }`}
+                    }`}
                   placeholder="Your name"
                 />
               </motion.div>
@@ -256,11 +259,10 @@ const Contact = ({ isDark }) => {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className={`w-full px-4 py-3 rounded-lg focus:outline-none transition-all ${
-                    isDark
+                  className={`w-full px-4 py-3 rounded-lg focus:outline-none transition-all ${isDark
                       ? 'bg-gray-700 border border-gray-600 focus:border-blue-500 text-white'
                       : 'bg-gray-100 border border-gray-300 focus:border-blue-400'
-                  }`}
+                    }`}
                   placeholder="your@email.com"
                 />
               </motion.div>
@@ -278,11 +280,10 @@ const Contact = ({ isDark }) => {
                   name="subject"
                   value={formData.subject}
                   onChange={handleChange}
-                  className={`w-full px-4 py-3 rounded-lg focus:outline-none transition-all ${
-                    isDark
+                  className={`w-full px-4 py-3 rounded-lg focus:outline-none transition-all ${isDark
                       ? 'bg-gray-700 border border-gray-600 focus:border-blue-500 text-white'
                       : 'bg-gray-100 border border-gray-300 focus:border-blue-400'
-                  }`}
+                    }`}
                   placeholder="Project inquiry"
                 />
               </motion.div>
@@ -300,11 +301,10 @@ const Contact = ({ isDark }) => {
                   value={formData.message}
                   onChange={handleChange}
                   rows="5"
-                  className={`w-full px-4 py-3 rounded-lg focus:outline-none transition-all resize-none ${
-                    isDark
+                  className={`w-full px-4 py-3 rounded-lg focus:outline-none transition-all resize-none ${isDark
                       ? 'bg-gray-700 border border-gray-600 focus:border-blue-500 text-white'
                       : 'bg-gray-100 border border-gray-300 focus:border-blue-400'
-                  }`}
+                    }`}
                   placeholder="Your message here..."
                 />
               </motion.div>
@@ -312,15 +312,14 @@ const Contact = ({ isDark }) => {
               {/* Status Messages */}
               {status && (
                 <motion.div
-                  className={`p-4 rounded-lg flex items-center gap-3 ${
-                    status.type === 'success'
+                  className={`p-4 rounded-lg flex items-center gap-3 ${status.type === 'success'
                       ? isDark
                         ? 'bg-green-500/20 border border-green-500/50 text-green-300'
                         : 'bg-green-400/20 border border-green-400/50 text-green-700'
                       : isDark
-                      ? 'bg-red-500/20 border border-red-500/50 text-red-300'
-                      : 'bg-red-400/20 border border-red-400/50 text-red-700'
-                  }`}
+                        ? 'bg-red-500/20 border border-red-500/50 text-red-300'
+                        : 'bg-red-400/20 border border-red-400/50 text-red-700'
+                    }`}
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                 >
@@ -337,11 +336,10 @@ const Contact = ({ isDark }) => {
               <motion.button
                 type="submit"
                 disabled={isLoading}
-                className={`w-full py-3 rounded-lg font-bold transition-all ${
-                  isDark
+                className={`w-full py-3 rounded-lg font-bold transition-all ${isDark
                     ? 'bg-gradient-to-r from-blue-500 to-purple-600 hover:shadow-lg hover:shadow-blue-500/50'
                     : 'bg-gradient-to-r from-blue-400 to-purple-500 hover:shadow-lg hover:shadow-blue-400/50'
-                } text-white disabled:opacity-50`}
+                  } text-white disabled:opacity-50`}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
@@ -364,11 +362,10 @@ const Contact = ({ isDark }) => {
 
         {/* CTA Section */}
         <motion.div
-          className={`p-12 rounded-xl backdrop-blur-md border text-center ${
-            isDark
+          className={`p-12 rounded-xl backdrop-blur-md border text-center ${isDark
               ? 'bg-gradient-to-r from-blue-500/10 to-purple-600/10 border-blue-500/30'
               : 'bg-gradient-to-r from-blue-400/10 to-purple-500/10 border-blue-400/30'
-          }`}
+            }`}
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -383,9 +380,8 @@ const Contact = ({ isDark }) => {
             Ready to Collaborate?
           </motion.h3>
           <motion.p
-            className={`text-lg mb-8 max-w-2xl mx-auto ${
-              isDark ? 'text-gray-300' : 'text-gray-700'
-            }`}
+            className={`text-lg mb-8 max-w-2xl mx-auto ${isDark ? 'text-gray-300' : 'text-gray-700'
+              }`}
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
@@ -396,11 +392,10 @@ const Contact = ({ isDark }) => {
           </motion.p>
           <motion.a
             href="#contact"
-            className={`inline-block px-8 py-3 rounded-lg font-bold ${
-              isDark
+            className={`inline-block px-8 py-3 rounded-lg font-bold ${isDark
                 ? 'bg-gradient-to-r from-blue-500 to-purple-600 hover:shadow-lg hover:shadow-blue-500/50'
                 : 'bg-gradient-to-r from-blue-400 to-purple-500 hover:shadow-lg hover:shadow-blue-400/50'
-            } text-white transition-all`}
+              } text-white transition-all`}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
